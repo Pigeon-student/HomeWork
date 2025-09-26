@@ -1,50 +1,9 @@
 ﻿using System;
 
-enum Dificalt : byte
-{
-    EASY = 1,
-    MEDIUM,
-    HARD,
-    NIGHTMARE
-}
-enum Classes : byte
-{
-    paladin,
-    demonhunter,
-    mage,
-    shaman,
-    ranger,
-    priest,
-    warlock,
-    nighthunter,
-    druid,
-    rogue,
-    deathknigh,
-    warrior
-}
-enum Heroes : byte
-{
-    Arthas,
-    Illidan,
-    Jaina,
-    Thrall,
-    Sylvanas,
-    Anduin,
-    Guldan,
-    Tyrande,
-    Malfurion,
-    Skwizgaar,
-    Mogreine,
-    Bolvar
-}
-
 class Program
 {
     static void Main()
     {
-        //Console.InputEncoding = System.Text.Encoding.UTF8;
-        //Console.OutputEncoding = System.Text.Encoding.UTF8;
-
         Random random = new Random();
         var randomNumber = random.Next(1, 12);
 
@@ -68,24 +27,14 @@ class Program
 
         Console.WriteLine($"\n\tNice! You choose {(Dificalt)chosenDificalt} level!\n");
 
-        switch ((Dificalt)chosenDificalt)
+        attemps = (Dificalt)chosenDificalt switch
         {
-            case Dificalt.EASY:
-                attemps = word.Length + 3;
-                break;
-            case Dificalt.MEDIUM:
-                attemps = word.Length + 1;
-                break;
-            case Dificalt.HARD:
-                attemps = word.Length;
-                break;
-            case Dificalt.NIGHTMARE:
-                attemps = word.Length - 1;
-                break;
-            default:
-                Console.WriteLine("You choose wrong dificalt. Try again.");
-                break;
-        }
+            Dificalt.EASY => word.Length + 3,
+            Dificalt.MEDIUM => word.Length + 1,
+            Dificalt.HARD => word.Length,
+            Dificalt.NIGHTMARE => word.Length - 1,
+            _ => throw new ArgumentException("You choose wrong difficulty!")
+        };
 
         Console.WriteLine($"\n\tGuess who {chosenHero} is? It's {word.Length} letters!");
 
